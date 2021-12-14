@@ -1,0 +1,2 @@
+float voltage
+float capacity
