@@ -27,9 +27,9 @@ def genHeader(name, vabList):
 #Messagee class implimentation generator function
 def genClass(name, vabList):
     cpp = CppFile("../src/"+name + ".cpp")
-    cpp("#include " + name + ".h")
+    cpp("#include \"" + name + ".h\"")
     cpp.newline(3)
-    cpp(name + "::" + name + "{}")
+    cpp(name + "::" + name + "(){}")
 
 ## Load message list 
 message_list = []
