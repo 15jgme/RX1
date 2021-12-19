@@ -5,14 +5,14 @@ class ematch
 {
 public:
 	ematch();
-	bool em1_firing = 0.0f;
-	bool em1_fired = 0.0f;
-	bool em1_safe = 0.0f;
-	bool em1_continuity = 0.0f;
-	bool em2_firing = 0.0f;
-	bool em2_fired = 0.0f;
-	bool em2_safe = 0.0f;
-	bool em2_continuity = 0.0f;
+	bool em1_firing = false;
+	bool em1_fired = false;
+	bool em1_safe = false;
+	bool em1_continuity = false;
+	bool em2_firing = false;
+	bool em2_fired = false;
+	bool em2_safe = false;
+	bool em2_continuity = false;
 	String getData();
 };
 #endif

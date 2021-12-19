@@ -27,7 +27,7 @@ def genHeader(name, vabList):
                 if (vabList[i][0]=="float"):
                     cpp(vabList[i][0] + " " + vabList[i][1] + " = 0.0f;")
                 elif (vabList[i][0]=="bool"):
-                    cpp(vabList[i][0] + " " + vabList[i][1] + " = 0.0f;")
+                    cpp(vabList[i][0] + " " + vabList[i][1] + " = false;")
                 else:
                     cpp(vabList[i][0] + " " + vabList[i][1] + " = 0.0f;")
             else:
