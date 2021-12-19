@@ -1,19 +1,20 @@
+#include <Arduino.h>
 #ifndef ATTITUDE_H
 #define ATTITUDE_H
 class attitude
 {
 public:
 	attitude();
-	float q1;
-	float q2;
-	float q3;
-	float q4;
-	float w1;
-	float w2;
-	float w3;
-	float alph1;
-	float alph2;
-	float alph3;
-	char *getData();
+	float q1 = 0.0f;
+	float q2 = 0.0f;
+	float q3 = 0.0f;
+	float q4 = 0.0f;
+	float w1 = 0.0f;
+	float w2 = 0.0f;
+	float w3 = 0.0f;
+	float alph1 = 0.0f;
+	float alph2 = 0.0f;
+	float alph3 = 0.0f;
+	String getData();
 };
 #endif

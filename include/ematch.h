@@ -1,17 +1,18 @@
+#include <Arduino.h>
 #ifndef EMATCH_H
 #define EMATCH_H
 class ematch
 {
 public:
 	ematch();
-	bool em1_firing;
-	bool em1_fired;
-	bool em1_safe;
-	bool em1_continuity;
-	bool em2_firing;
-	bool em2_fired;
-	bool em2_safe;
-	bool em2_continuity;
-	char *getData();
+	bool em1_firing = 0.0f;
+	bool em1_fired = 0.0f;
+	bool em1_safe = 0.0f;
+	bool em1_continuity = 0.0f;
+	bool em2_firing = 0.0f;
+	bool em2_fired = 0.0f;
+	bool em2_safe = 0.0f;
+	bool em2_continuity = 0.0f;
+	String getData();
 };
 #endif
