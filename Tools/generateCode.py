@@ -20,9 +20,8 @@ def genHeader(name, vabList):
     cpp("#ifndef " + name.upper() + "_H")
     cpp("#define " + name.upper() + "_H")
     with cpp.block("class " + name, ";"):
-        cpp.label('public')
-        cpp(name + "();") 
-        for i in range(0,len(vabList)):
+        # Make variables
+        for i in range(0,len(vabList)): 
             if initVals:
                 if (vabList[i][0]=="float"):
                     cpp(vabList[i][0] + " " + vabList[i][1] + " = 0.0f;")
@@ -32,6 +31,13 @@ def genHeader(name, vabList):
                     cpp(vabList[i][0] + " " + vabList[i][1] + " = 0.0f;")
             else:
                 cpp(vabList[i][0] + " " + vabList[i][1] + " = 0.0f;")
+        cpp.label('public')
+        cpp("uint32_t sample = 0;")
+        #Variable access functions
+        for i in range(0,len(vabList)):
+            cpp("void set" + vabList[i][1] + "(" + vabList[i][0] + " newVal);") #set 
+            cpp(vabList[i][0] + " get" + vabList[i][1] + "();") #get
+        cpp(name + "();") 
         cpp("String getData();")
     cpp("#endif")
 
@@ -53,6 +59,18 @@ def genClass(name, vabList):
                 writeOutStr = writeOutStr + "+\",\"+"
         cpp("String datMsg = " + writeOutStr + ";")
         cpp("return datMsg;")
+
+    for i in range(0, len(vabList)):
+        with cpp.block(vabList[i][0] + " " + name + "::" + "get" + vabList[i][1] + "()"):
+            cpp("sample ++;")
+            cpp("return " + vabList[i][1] + ";")
+        cpp.newline(1)
+        with cpp.block("void " + name + "::" + "set" + vabList[i][1] + "(" + vabList[i][0] +" newVal)"):
+            cpp("sample ++;")
+            cpp(vabList[i][1] + " = newVal;")
+        cpp.newline(1)
+
+
 
 #Message class
 def genMsgHeader(nameList):
