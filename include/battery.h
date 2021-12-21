@@ -3,10 +3,15 @@
 #define BATTERY_H
 class battery
 {
-public:
-	battery();
 	float voltage = 0.0f;
 	float capacity = 0.0f;
+public:
+	uint32_t sample = 0;
+	void setvoltage(float newVal);
+	float getvoltage();
+	void setcapacity(float newVal);
+	float getcapacity();
+	battery();
 	String getData();
 };
 #endif

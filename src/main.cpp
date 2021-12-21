@@ -5,7 +5,7 @@ messages msg;
 void setup() {
   // put your setup code here, to run once:
   SerialUSB.begin(115200);
-  msg.battery_t.capacity = 99.0f;
+  msg.battery_t.setcapacity(99.0f);
 }
 
 void loop() {
