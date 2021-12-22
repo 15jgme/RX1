@@ -16,5 +16,6 @@ public:
 	ematch ematch_t;
 	position position_t;
 	String getData();
+	String getNames();
 };
 #endif

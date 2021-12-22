@@ -36,6 +36,7 @@ public:
 	void setalph3(float newVal);
 	float getalph3();
 	attitude();
-	String getData();
+	String getData(); // Returns all data in topic
+	String getNames(); // Returns a string csv of the names of variables ouput by getData in same order
 };
 #endif
