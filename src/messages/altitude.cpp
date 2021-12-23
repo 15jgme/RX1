@@ -8,7 +8,7 @@ String altitude::getData()
 	String datMsg = String(altitude_m)+","+String(pressure)+","+String(temperature);
 	return datMsg;
 }
-String altitude::getData()
+String altitude::getNames()
 {
 	String nameMsg = String("altitude_m")+","+String("pressure")+","+String("temperature");
 	return nameMsg;

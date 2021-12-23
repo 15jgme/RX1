@@ -66,7 +66,7 @@ def genClass(name, vabList):
         cpp("String datMsg = " + writeOutStr + ";")
         cpp("return datMsg;")
 
-    with cpp.block("String " + name + "::" + "getData()"): # Get names
+    with cpp.block("String " + name + "::" + "getNames()"): # Get names
         vabNames = []
         writeOutStr = ""
         for i in range(0,len(vabList)):
@@ -123,7 +123,7 @@ def genMsgClass(nameList):
         cpp("String datMsg = " + writeOutStr + ";")
         cpp("return datMsg;")
     
-    with cpp.block("String messages::getData()"): #getNames
+    with cpp.block("String messages::getNames()"): #getNames
         vabNames = []
         writeOutStr = ""
         for i in range(0,len(nameList)):

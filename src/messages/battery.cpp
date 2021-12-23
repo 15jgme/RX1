@@ -8,7 +8,7 @@ String battery::getData()
 	String datMsg = String(voltage)+","+String(capacity);
 	return datMsg;
 }
-String battery::getData()
+String battery::getNames()
 {
 	String nameMsg = String("voltage")+","+String("capacity");
 	return nameMsg;

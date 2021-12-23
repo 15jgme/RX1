@@ -6,6 +6,7 @@
 #include "battery.h"
 #include "ematch.h"
 #include "position.h"
+#include "commander.h"
 class messages
 {
 public:
@@ -15,6 +16,7 @@ public:
 	battery battery_t;
 	ematch ematch_t;
 	position position_t;
+	commander commander_t;
 	String getData();
 	String getNames();
 };

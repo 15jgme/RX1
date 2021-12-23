@@ -8,7 +8,7 @@ String position::getData()
 	String datMsg = String(a1)+","+String(a2)+","+String(a3);
 	return datMsg;
 }
-String position::getData()
+String position::getNames()
 {
 	String nameMsg = String("a1")+","+String("a2")+","+String("a3");
 	return nameMsg;
