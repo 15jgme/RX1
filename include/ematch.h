@@ -30,6 +30,7 @@ public:
 	void setem2_continuity(bool newVal);
 	bool getem2_continuity();
 	ematch();
-	String getData();
+	String getData(); // Returns all data in topic
+	String getNames(); // Returns a string csv of the names of variables ouput by getData in same order
 };
 #endif

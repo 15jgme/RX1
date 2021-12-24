@@ -8,39 +8,41 @@ String altitude::getData()
 	String datMsg = String(altitude_m)+","+String(pressure)+","+String(temperature);
 	return datMsg;
 }
+String altitude::getNames()
+{
+	String nameMsg = String("altitude_m")+","+String("pressure")+","+String("temperature");
+	return nameMsg;
+}
 float altitude::getaltitude_m()
 {
-	sample ++;
 	return altitude_m;
 }
 
 void altitude::setaltitude_m(float newVal)
 {
-	sample ++;
+	if(newVal != altitude_m){sample ++;}
 	altitude_m = newVal;
 }
 
 float altitude::getpressure()
 {
-	sample ++;
 	return pressure;
 }
 
 void altitude::setpressure(float newVal)
 {
-	sample ++;
+	if(newVal != pressure){sample ++;}
 	pressure = newVal;
 }
 
 float altitude::gettemperature()
 {
-	sample ++;
 	return temperature;
 }
 
 void altitude::settemperature(float newVal)
 {
-	sample ++;
+	if(newVal != temperature){sample ++;}
 	temperature = newVal;
 }
 

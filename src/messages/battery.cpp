@@ -8,27 +8,30 @@ String battery::getData()
 	String datMsg = String(voltage)+","+String(capacity);
 	return datMsg;
 }
+String battery::getNames()
+{
+	String nameMsg = String("voltage")+","+String("capacity");
+	return nameMsg;
+}
 float battery::getvoltage()
 {
-	sample ++;
 	return voltage;
 }
 
 void battery::setvoltage(float newVal)
 {
-	sample ++;
+	if(newVal != voltage){sample ++;}
 	voltage = newVal;
 }
 
 float battery::getcapacity()
 {
-	sample ++;
 	return capacity;
 }
 
 void battery::setcapacity(float newVal)
 {
-	sample ++;
+	if(newVal != capacity){sample ++;}
 	capacity = newVal;
 }
 

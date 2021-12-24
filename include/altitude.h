@@ -15,6 +15,7 @@ public:
 	void settemperature(float newVal);
 	float gettemperature();
 	altitude();
-	String getData();
+	String getData(); // Returns all data in topic
+	String getNames(); // Returns a string csv of the names of variables ouput by getData in same order
 };
 #endif

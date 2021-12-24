@@ -12,6 +12,7 @@ public:
 	void setcapacity(float newVal);
 	float getcapacity();
 	battery();
-	String getData();
+	String getData(); // Returns all data in topic
+	String getNames(); // Returns a string csv of the names of variables ouput by getData in same order
 };
 #endif

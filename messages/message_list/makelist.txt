@@ -3,3 +3,4 @@ attitude
 battery
 ematch
 position
+commander

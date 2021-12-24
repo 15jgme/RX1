@@ -1,0 +1,42 @@
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+{
+  "manifestVersion": "2.0.0",
+  "signatureType": "community",
+  "signedByOrg": "marcusolsson",
+  "signedByOrgName": "Marcus Olsson",
+  "plugin": "marcusolsson-csv-datasource",
+  "version": "0.6.1",
+  "time": 1624354321325,
+  "keyId": "7e4d0c6a708866e7",
+  "files": {
+    "module.js.map": "b1c9d562e4a702d378c2566868cb65417ee724de0bebd1efa9391e7d0564fd6d",
+    "img/dark.png": "9e0d577c29d983d7c258ea5704ecdc3e574ff3d16cb9762e9b7fd06a13630daa",
+    "img/light.png": "e71042db587b73f3b6f5e90df09b9d74213060632a3b22250f483a55c752e287",
+    "img/logo.svg": "0bcb07e8f33b833bc4e5ac340feb0997a71dec4c0d8f497feaac775823bbb091",
+    "plugin.json": "12b1a01f898be89adb9785fa5f1af78bcb68bfe5d16b82260ea67b927a98b4b8",
+    "module.js": "69e2bc8606d6e65c577f87fb27352ff9167b343ce217fef0a21085c7a5c6b0f4",
+    "gpx_csv-datasource_darwin_arm64": "bc3c1088ed6f821708d0cfe5f8e0e663983539b1086bcb44fa70dff984c5030e",
+    "module.js.LICENSE.txt": "0d8f66cd4afb566cb5b7e1540c68f43b939d3eba12ace290f18abc4f4cb53ed0",
+    "gpx_csv-datasource_linux_arm": "714c3f6bfd2ce8ccf48baebae425fa1328207a72c7560cb57a601908de6e2a3e",
+    "gpx_csv-datasource_linux_amd64": "8ea41c460b4eb548f122ed7725d60480044da14df9405644581e42b544d8ec88",
+    "LICENSE": "12ab7a0961275f5ce7a428e662279cf49bab887d12b2ff7bfde738346178c28c",
+    "gpx_csv-datasource_darwin_amd64": "a828c19d17cd6335e0d1276c2f991ed34ebb01fb6959c23e55c9cfdff0560138",
+    "gpx_csv-datasource_linux_arm64": "c84a4a8d03d54ca2c9993cf41a24275d68764f74a27196318f7013d12b3c07ce",
+    "CHANGELOG.md": "0e055e795696e58cf3a705357f247698860d33b26461652c790d891eebb722d7",
+    "README.md": "6437af135fac984b4aca13af7e0ab958ad5cd1c1cd2418b73492f76204a55be5",
+    "gpx_csv-datasource_windows_amd64.exe": "40dafcd10947267d4079b3bf6235ef11b674cb14bee8a841adc2b54712b57bb6"
+  }
+}
+-----BEGIN PGP SIGNATURE-----
+Version: OpenPGP.js v4.10.1
+Comment: https://openpgpjs.org
+
+wqEEARMKAAYFAmDRrhEACgkQfk0ManCIZufKOAII4oaloYBjeTWKwD1oZk8e
+du5CTlo51SxuaJI/8/OHkp33W8mXqrt9gTOoF1ZhAiE1Nz5l3UlhP8J3EWXK
+hwNiH2cCCQEKaD7AtWI/MY/0K8wW65HNJh1eW7QZMfTaj+PtfvoPyWb1yhDw
+Xt6OBTtb3yk16lsOXbJBE+px1o2ikq6yAhrLeA==
+=t4sX
+-----END PGP SIGNATURE-----

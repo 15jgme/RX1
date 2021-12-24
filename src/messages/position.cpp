@@ -8,39 +8,41 @@ String position::getData()
 	String datMsg = String(a1)+","+String(a2)+","+String(a3);
 	return datMsg;
 }
+String position::getNames()
+{
+	String nameMsg = String("a1")+","+String("a2")+","+String("a3");
+	return nameMsg;
+}
 float position::geta1()
 {
-	sample ++;
 	return a1;
 }
 
 void position::seta1(float newVal)
 {
-	sample ++;
+	if(newVal != a1){sample ++;}
 	a1 = newVal;
 }
 
 float position::geta2()
 {
-	sample ++;
 	return a2;
 }
 
 void position::seta2(float newVal)
 {
-	sample ++;
+	if(newVal != a2){sample ++;}
 	a2 = newVal;
 }
 
 float position::geta3()
 {
-	sample ++;
 	return a3;
 }
 
 void position::seta3(float newVal)
 {
-	sample ++;
+	if(newVal != a3){sample ++;}
 	a3 = newVal;
 }
 
