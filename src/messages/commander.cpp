@@ -5,12 +5,12 @@
 commander::commander(){}
 String commander::getData()
 {
-	String datMsg = String(state);
+	String datMsg = String(state)+","+String(timestamp);
 	return datMsg;
 }
 String commander::getNames()
 {
-	String nameMsg = String("state");
+	String nameMsg = String("state")+","+"timestamp";
 	return nameMsg;
 }
 int commander::getstate()
@@ -20,7 +20,7 @@ int commander::getstate()
 
 void commander::setstate(int newVal)
 {
-	if(newVal != state){sample ++;}
+	if(newVal != state){timestamp = micros();}
 	state = newVal;
 }
 

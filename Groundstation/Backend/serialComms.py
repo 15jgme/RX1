@@ -12,10 +12,17 @@ class RX1_comms:
 
         #load names list
         open_file = open(filename, "rb")
-        self.names = pickle.load(open_file)
+        loadedData = pickle.load(open_file)
+        self.names = loadedData[0]
+        self.topic = loadedData[1]
         open_file.close()
+
+        self.firstRun = True
     
     def update(self):
+        if self.firstRun:
+            self.dev.flush
+            self.firstRun = False
         self.msg = str(self.dev.readline()[0: -2].decode("utf-8"))
         self.data = list(map(float, self.msg.split(",")))
         

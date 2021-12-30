@@ -3,6 +3,7 @@
 #define ATTITUDE_H
 class attitude
 {
+	uint32_t timestamp = 0;
 	float q1 = 0.0f;
 	float q2 = 0.0f;
 	float q3 = 0.0f;
@@ -14,7 +15,6 @@ class attitude
 	float alph2 = 0.0f;
 	float alph3 = 0.0f;
 public:
-	uint32_t sample = 0;
 	void setq1(float newVal);
 	float getq1();
 	void setq2(float newVal);

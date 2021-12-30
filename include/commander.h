@@ -3,9 +3,9 @@
 #define COMMANDER_H
 class commander
 {
+	uint32_t timestamp = 0;
 	int state = 0.0f;
 public:
-	uint32_t sample = 0;
 	void setstate(int newVal);
 	int getstate();
 	commander();

@@ -3,11 +3,11 @@
 #define ALTITUDE_H
 class altitude
 {
+	uint32_t timestamp = 0;
 	float altitude_m = 0.0f;
 	float pressure = 0.0f;
 	float temperature = 0.0f;
 public:
-	uint32_t sample = 0;
 	void setaltitude_m(float newVal);
 	float getaltitude_m();
 	void setpressure(float newVal);
