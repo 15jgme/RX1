@@ -3,6 +3,7 @@
 #define EMATCH_H
 class ematch
 {
+	uint32_t timestamp = 0;
 	bool em1_firing = false;
 	bool em1_fired = false;
 	bool em1_safe = false;
@@ -12,7 +13,6 @@ class ematch
 	bool em2_safe = false;
 	bool em2_continuity = false;
 public:
-	uint32_t sample = 0;
 	void setem1_firing(bool newVal);
 	bool getem1_firing();
 	void setem1_fired(bool newVal);

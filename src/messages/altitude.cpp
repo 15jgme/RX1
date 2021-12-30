@@ -5,12 +5,12 @@
 altitude::altitude(){}
 String altitude::getData()
 {
-	String datMsg = String(altitude_m)+","+String(pressure)+","+String(temperature);
+	String datMsg = String(timestamp)+","+String(altitude_m)+","+String(pressure)+","+String(temperature);
 	return datMsg;
 }
 String altitude::getNames()
 {
-	String nameMsg = String("altitude_m")+","+String("pressure")+","+String("temperature");
+	String nameMsg = "timestamp,"+String("altitude_m")+","+String("pressure")+","+String("temperature");
 	return nameMsg;
 }
 float altitude::getaltitude_m()
@@ -20,7 +20,7 @@ float altitude::getaltitude_m()
 
 void altitude::setaltitude_m(float newVal)
 {
-	if(newVal != altitude_m){sample ++;}
+	if(newVal != altitude_m){timestamp = micros();}
 	altitude_m = newVal;
 }
 
@@ -31,7 +31,7 @@ float altitude::getpressure()
 
 void altitude::setpressure(float newVal)
 {
-	if(newVal != pressure){sample ++;}
+	if(newVal != pressure){timestamp = micros();}
 	pressure = newVal;
 }
 
@@ -42,7 +42,7 @@ float altitude::gettemperature()
 
 void altitude::settemperature(float newVal)
 {
-	if(newVal != temperature){sample ++;}
+	if(newVal != temperature){timestamp = micros();}
 	temperature = newVal;
 }
 

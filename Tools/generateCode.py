@@ -16,7 +16,7 @@ file_path = os.path.join(os.path.sep,parent_path,"messages", "message_list","mak
 
 #Variables list this stores the names of data output by the getData function in the correct order.
 vab_names_list = []
-
+topic_names_list = []
 
 #Message class header generator function
 def genHeader(name, vabList):
@@ -25,6 +25,10 @@ def genHeader(name, vabList):
     cpp("#ifndef " + name.upper() + "_H")
     cpp("#define " + name.upper() + "_H")
     with cpp.block("class " + name, ";"):
+        # Timestamp
+        cpp("uint32_t timestamp = 0;") #maximum runtime around 71 mins before overflow 
+        vab_names_list.append("timestamp")
+        
         # Make variables
         for i in range(0,len(vabList)): 
             if initVals:
@@ -37,11 +41,11 @@ def genHeader(name, vabList):
             else:
                 cpp(vabList[i][0] + " " + vabList[i][1] + " = 0.0f;")
         cpp.label('public')
-        cpp("uint32_t sample = 0;")
         #Variable access functions
         for i in range(0,len(vabList)):
             cpp("void set" + vabList[i][1] + "(" + vabList[i][0] + " newVal);") #set 
             cpp(vabList[i][0] + " get" + vabList[i][1] + "();") #get
+            vab_names_list.append(vabList[i][1])
         cpp(name + "();") 
         cpp("String getData(); // Returns all data in topic")
         cpp("String getNames(); // Returns a string csv of the names of variables ouput by getData in same order")
@@ -61,9 +65,9 @@ def genClass(name, vabList):
             vabNames.append(vabList[i][1])
             # writeOutStr = writeOutStr + "String(" + name + "::" + vabNames[i] + ")"
             writeOutStr = writeOutStr + "String(" + vabNames[i] + ")"
-            if i != len(vabList)-1:
+            if i < len(vabList)-1:
                 writeOutStr = writeOutStr + "+\",\"+"
-        cpp("String datMsg = " + writeOutStr + ";")
+        cpp("String datMsg = String(timestamp)+\",\"+" + writeOutStr + ";")
         cpp("return datMsg;")
 
     with cpp.block("String " + name + "::" + "getNames()"): # Get names
@@ -72,9 +76,9 @@ def genClass(name, vabList):
         for i in range(0,len(vabList)):
             vabNames.append(vabList[i][1])
             writeOutStr = writeOutStr + "String(\"" + vabNames[i] + "\")"
-            if i != len(vabList)-1:
+            if i < len(vabList)-1:
                 writeOutStr = writeOutStr + "+\",\"+"
-        cpp("String nameMsg = " + writeOutStr + ";")
+        cpp("String nameMsg = \"timestamp,\"+" + writeOutStr + ";")
         cpp("return nameMsg;")
 
     for i in range(0, len(vabList)):
@@ -82,7 +86,7 @@ def genClass(name, vabList):
             cpp("return " + vabList[i][1] + ";")
         cpp.newline(1)
         with cpp.block("void " + name + "::" + "set" + vabList[i][1] + "(" + vabList[i][0] +" newVal)"):
-            cpp("if(newVal != " + vabList[i][1] + "){sample ++;}")
+            cpp("if(newVal != " + vabList[i][1] + "){timestamp = micros();}")
             cpp(vabList[i][1] + " = newVal;")
         cpp.newline(1)
 
@@ -150,7 +154,8 @@ with open(file_path) as file:
                 inner_list = [elt.strip() for elt in line.split(' ')]
                 if not ("#" in inner_list[0]):
                     list_of_lists.append(inner_list)
-                    vab_names_list.append(inner_list[1])
+                    # vab_names_list.append(inner_list[1])
+                    topic_names_list.append(message_list[-1])
         
 
         genHeader(message_list[-1], list_of_lists)
@@ -162,7 +167,10 @@ with open(file_path) as file:
 #Dump vab_names_list for use in the ground station
 file_name = "message_identity.pkl"
 open_file = open(file_name, "wb")
-pickle.dump(vab_names_list, open_file)
+allData = []
+allData.append(vab_names_list)
+allData.append(topic_names_list)
+pickle.dump(allData, open_file)
 open_file.close()
 ## CLASS STRUCTURE ##
 
