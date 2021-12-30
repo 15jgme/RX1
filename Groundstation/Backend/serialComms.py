@@ -6,7 +6,7 @@ filename = "../../Tools/message_identity.pkl"
 class RX1_comms:
     def __init__(self,port):
         self.comm_port = port
-        dev = serial.Serial("COM8", 9600)
+        dev = serial.Serial("COM8", 9600, timeout=1)
         self.dev = dev
         self.msg = ""
 

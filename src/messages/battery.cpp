@@ -5,12 +5,12 @@
 battery::battery(){}
 String battery::getData()
 {
-	String datMsg = String(voltage)+","+String(capacity)+","+String(timestamp);
+	String datMsg = String(timestamp)+","+String(voltage)+","+String(capacity);
 	return datMsg;
 }
 String battery::getNames()
 {
-	String nameMsg = String("voltage")+","+String("capacity")+","+"timestamp";
+	String nameMsg = "timestamp,"+String("voltage")+","+String("capacity");
 	return nameMsg;
 }
 float battery::getvoltage()

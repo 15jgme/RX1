@@ -27,6 +27,7 @@ def genHeader(name, vabList):
     with cpp.block("class " + name, ";"):
         # Timestamp
         cpp("uint32_t timestamp = 0;") #maximum runtime around 71 mins before overflow 
+        vab_names_list.append("timestamp")
         
         # Make variables
         for i in range(0,len(vabList)): 
@@ -44,6 +45,7 @@ def genHeader(name, vabList):
         for i in range(0,len(vabList)):
             cpp("void set" + vabList[i][1] + "(" + vabList[i][0] + " newVal);") #set 
             cpp(vabList[i][0] + " get" + vabList[i][1] + "();") #get
+            vab_names_list.append(vabList[i][1])
         cpp(name + "();") 
         cpp("String getData(); // Returns all data in topic")
         cpp("String getNames(); // Returns a string csv of the names of variables ouput by getData in same order")
@@ -63,8 +65,9 @@ def genClass(name, vabList):
             vabNames.append(vabList[i][1])
             # writeOutStr = writeOutStr + "String(" + name + "::" + vabNames[i] + ")"
             writeOutStr = writeOutStr + "String(" + vabNames[i] + ")"
-            writeOutStr = writeOutStr + "+\",\"+"
-        cpp("String datMsg = " + writeOutStr + "String(timestamp);")
+            if i < len(vabList)-1:
+                writeOutStr = writeOutStr + "+\",\"+"
+        cpp("String datMsg = String(timestamp)+\",\"+" + writeOutStr + ";")
         cpp("return datMsg;")
 
     with cpp.block("String " + name + "::" + "getNames()"): # Get names
@@ -73,8 +76,9 @@ def genClass(name, vabList):
         for i in range(0,len(vabList)):
             vabNames.append(vabList[i][1])
             writeOutStr = writeOutStr + "String(\"" + vabNames[i] + "\")"
-            writeOutStr = writeOutStr + "+\",\"+"
-        cpp("String nameMsg = " + writeOutStr + "\"timestamp\";")
+            if i < len(vabList)-1:
+                writeOutStr = writeOutStr + "+\",\"+"
+        cpp("String nameMsg = \"timestamp,\"+" + writeOutStr + ";")
         cpp("return nameMsg;")
 
     for i in range(0, len(vabList)):
@@ -150,7 +154,7 @@ with open(file_path) as file:
                 inner_list = [elt.strip() for elt in line.split(' ')]
                 if not ("#" in inner_list[0]):
                     list_of_lists.append(inner_list)
-                    vab_names_list.append(inner_list[1])
+                    # vab_names_list.append(inner_list[1])
                     topic_names_list.append(message_list[-1])
         
 

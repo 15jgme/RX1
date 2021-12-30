@@ -5,12 +5,12 @@
 commander::commander(){}
 String commander::getData()
 {
-	String datMsg = String(state)+","+String(timestamp);
+	String datMsg = String(timestamp)+","+String(state);
 	return datMsg;
 }
 String commander::getNames()
 {
-	String nameMsg = String("state")+","+"timestamp";
+	String nameMsg = "timestamp,"+String("state");
 	return nameMsg;
 }
 int commander::getstate()

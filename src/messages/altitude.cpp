@@ -5,12 +5,12 @@
 altitude::altitude(){}
 String altitude::getData()
 {
-	String datMsg = String(altitude_m)+","+String(pressure)+","+String(temperature)+","+String(timestamp);
+	String datMsg = String(timestamp)+","+String(altitude_m)+","+String(pressure)+","+String(temperature);
 	return datMsg;
 }
 String altitude::getNames()
 {
-	String nameMsg = String("altitude_m")+","+String("pressure")+","+String("temperature")+","+"timestamp";
+	String nameMsg = "timestamp,"+String("altitude_m")+","+String("pressure")+","+String("temperature");
 	return nameMsg;
 }
 float altitude::getaltitude_m()
