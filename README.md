@@ -22,7 +22,7 @@ The main goals of the software are
 -Software in the loop (using fakeArduino) spoof flight by replacing the code inside the sensors class with some flight dynamics (this should be a pretty cool one)
 
 If we can get things a little more portable, I think this could be very helpful even for teams competing in sport rocketry like the SA Cup, and save a lot of tiresome work building groundstation and telemetry systems. 
-# Any contributions are super encouraged and appreciated
+# Any contributions are super encouraged and appreciated!
 
 ## Requirements 
 - Platformio
