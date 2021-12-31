@@ -1,3 +1,6 @@
 [submodule "Tools/code_generator"]
 	path = Tools/code_generator
 	url = https://github.com/yuchdev/code_generator
+[submodule "Groundstation/Grafana"]
+	path = Groundstation/Grafana
+	url = https://github.com/15jgme/mqtt-datasource
