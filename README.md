@@ -10,7 +10,10 @@ The main goals of the software are
 - Parachute control
 - State estimation
 - Servo control
+
+
 ![RX1_telemetry](https://user-images.githubusercontent.com/47725944/147837025-ddf2a6e5-edc9-43ac-ac8d-1b8d3db4a939.gif)
+
 ## Short term goals
 
 -Build up the flight software now that the messaging is workable
