@@ -11,7 +11,7 @@ The main goals of the software are
 - State estimation
 - Servo control
 
-##Short term goals
+## Short term goals
 
 -Build up the flight software now that the messaging is workable
 -Find ways to abstract the code to more platforms (I'd like to avoid relying on Arduino.h and the feather defines)
