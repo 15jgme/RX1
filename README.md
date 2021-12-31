@@ -10,7 +10,7 @@ The main goals of the software are
 - Parachute control
 - State estimation
 - Servo control
-
+![RX1_telemetry](https://user-images.githubusercontent.com/47725944/147837025-ddf2a6e5-edc9-43ac-ac8d-1b8d3db4a939.gif)
 ## Short term goals
 
 -Build up the flight software now that the messaging is workable
@@ -77,7 +77,6 @@ The **msg** object is declared globally so you can access your topics anywhere!
 ## Telemetry 
 Now the fun part! Running **runProcessing.py** from inside /Groundstation/Backend will listen to serial data from something like an xbee split it into topics and publish it to your friendly local MQTT broker (tested with mosquitto), you just need to change the hostname in generateGSCode.py (will fix soon!). 
 Then to visualize the data you should be able to use Grafana, or plotjuggler.
-![RX1_telemetry](https://user-images.githubusercontent.com/47725944/147837025-ddf2a6e5-edc9-43ac-ac8d-1b8d3db4a939.gif)
                                                                                                                       
 **PS** runProcessing.py will also save the telemetry data it gets to a csv in /Groundstation/Backend/Logs just in case something really bad happens to your vehicle 💥                                                                                                                  
                                                                                                                       
