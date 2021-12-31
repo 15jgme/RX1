@@ -1,14 +1,5 @@
-# import json
-
-try:
-    import ujson as json
-except ImportError:
-    try:
-        import simplejson as json
-    except ImportError:
-        import json
-
-storageFile = "tempLog.json"
+import json
+import paho.mqtt.client as mqtt
 
 class dataLogging:
     def __init__(self):
@@ -16,12 +7,10 @@ class dataLogging:
         self.t0 = 0
         self.oldData = []
         self.firstRun = True
-        self.data['altitude'] = []
-        self.data['attitude'] = []
-        self.data['battery'] = []
-        self.data['ematch'] = []
-        self.data['position'] = []
-        self.data['commander'] = []
+        
+        broker_address="LAPTOP-R70PIQ08" 
+        self.client = mqtt.Client("RX1_1") #create new instance
+        self.client.connect(broker_address, 1883) #connect to broker
 
 
     def update(self,newData):
@@ -30,15 +19,15 @@ class dataLogging:
             self.firstRun = False
 
         if round(self.oldData[0]) != round(newData[0]):
-            self.data['altitude'].append({
-                'timestamp' : newData[0]/1000 + self.t0,
+            dict ={
                 'altitude_m' : newData[1],
                 'pressure' : newData[2],
                 'temperature' : newData[3],
-            })
-        if round(self.oldData[4]) != round(newData[4]):        
-            self.data['attitude'].append({
-                'timestamp' : newData[4]/1000 + self.t0,
+            }
+            datJson = json.dumps(dict)
+            self.client.publish("RX1/altitude", datJson)
+        if round(self.oldData[4]) != round(newData[4]):
+            dict ={
                 'q1' : newData[5],
                 'q2' : newData[6],
                 'q3' : newData[7],
@@ -49,16 +38,18 @@ class dataLogging:
                 'alph1' : newData[12],
                 'alph2' : newData[13],
                 'alph3' : newData[14],
-            })
+            }
+            datJson = json.dumps(dict)
+            self.client.publish("RX1/attitude", datJson)
         if round(self.oldData[15]) != round(newData[15]):
-            self.data['battery'].append({
-                'timestamp' : newData[15]/1000 + self.t0,
+            dict ={
                 'voltage' : newData[16],
                 'capacity' : newData[17],
-            })
+            }
+            datJson = json.dumps(dict)
+            self.client.publish("RX1/battery", datJson)
         if round(self.oldData[18]) != round(newData[18]):
-            self.data['ematch'].append({
-                'timestamp' : newData[18]/1000 + self.t0,
+            dict ={
                 'em1_firing' : newData[19],
                 'em1_fired' : newData[20],
                 'em1_safe' : newData[21],
@@ -67,18 +58,20 @@ class dataLogging:
                 'em2_fired' : newData[24],
                 'em2_safe' : newData[25],
                 'em2_continuity' : newData[26],
-            })
+            }
+            datJson = json.dumps(dict)
+            self.client.publish("RX1/ematch", datJson)
         if round(self.oldData[27]) != round(newData[27]):
-            self.data['position'].append({
-                'timestamp' : newData[27]/1000 + self.t0,
+            dict ={
                 'a1' : newData[28],
                 'a2' : newData[29],
                 'a3' : newData[30],
-            })
+            }
+            datJson = json.dumps(dict)
+            self.client.publish("RX1/position", datJson)
         if round(self.oldData[31]) != round(newData[31]):
-            self.data['commander'].append({
-                'timestamp' : newData[31]/1000 + self.t0,
+            dict ={
                 'state' : newData[32],
-            })
-        with open('tempLog.json', 'w') as outfile:
-            json.dump(self.data, outfile)
+            }
+            datJson = json.dumps(dict)
+            self.client.publish("RX1/commander", datJson)
