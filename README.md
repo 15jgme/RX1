@@ -10,3 +10,59 @@ The main goals of the software are
 - Parachute control
 - State estimation
 - Servo control
+
+## Requirements 
+- Platformio
+- Python3 (and a few packages, check the setup scripts)
+- An MQTT broker (only tested with mosquitto)
+- Grafana or plotjuggler (<-- probably less of a headache but less pretty) for visualization
+- 🚀🚀🚀 lots of rocket emojis
+
+## Making a new topic 
+If you want to add a new topic (or add variables to an existing topic) it is super easy!
+First make a new message file <yourmessage>.msg inside **/messages/message_list/**
+  
+This file contains the variables inside your new message topic, comments are lines beginning with an '#'
+Each line representing a variable must begin with its data type (eg int, float, uint8_t), this is coppied straight into C++ so make sure what ever you choose is supported by C++ or by the defines in the Arduino header
+Next is the variable name this can be anything as its not sent to the groundstation each time
+
+Once you're finished you should have a file with rows looking like this (watch for unintentional spaces and mixing comments with message descriptions isn't supported yet)
+  **parachute.msg**
+  '''
+  bool continuity
+  bool fired
+  float time_delay
+  '''
+Now open the makelist.txt and add your new topic to one of the list rows
+
+All thats left to do is generate the flight computer and groundstation code (hopefully this will be automatic soon)
+**flight codegen**
+  first cd to /Tools/ 
+  then run python generateCode.py in your terminal
+**groundstation codegen**
+  first cd to /Groundstation/Backend 
+  then run python generateGSCode.py in your terminal
+  
+Now when you build your code you should have access to a new object inside the msg object, msg.yourmessage !
+msg.yourmessage holds all your variables.
+  
+## Usage of the message system on the flight computer
+The message structure was designed to help reduce redundant processing on the flight computer. 
+For example, why run your apogee detection algorithem if there's no new altitude data? 
+
+To account for this, RX1 messages topics all contain a timestamp variable (no need to include it in your .msg file it's built for you 😉). 
+Variables in RX1 message topics all must be updated using msg.yourmessage.set<variable>(newData), and returned by msg.yourmessage.get<variable>(newData). 
+When ever the set funtion is run (so long as the newData is different from what's already there) the timestamp is updated.
+The timestamp is accessed by msg.yourmessage.timestamp (it's the only non-private variable in the topic).
+
+To prevent, lets say your apogee detector from running on stale data for example, you can save the last data timestamp you ran the detector on.
+Lets call this '''oldTs''', when your detector needs to run, simply only run it if(oldTS < msg.parachute.timestamp) {run detector}
+                                                                                                                   
+## One more quick note on the central message object
+The **msg** object is declared globally so you can access your topics anywhere!
+
+                                                                            
+  
+
+  
+  
