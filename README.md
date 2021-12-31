@@ -28,11 +28,11 @@ Next is the variable name this can be anything as its not sent to the groundstat
 
 Once you're finished you should have a file with rows looking like this (watch for unintentional spaces and mixing comments with message descriptions isn't supported yet)
   **parachute.msg**
-  '''
+  ```
   bool continuity
   bool fired
   float time_delay
-  '''
+  ```
 Now open the makelist.txt and add your new topic to one of the list rows
 
 All thats left to do is generate the flight computer and groundstation code (hopefully this will be automatic soon)
@@ -56,11 +56,21 @@ When ever the set funtion is run (so long as the newData is different from what'
 The timestamp is accessed by msg.yourmessage.timestamp (it's the only non-private variable in the topic).
 
 To prevent, lets say your apogee detector from running on stale data for example, you can save the last data timestamp you ran the detector on.
-Lets call this '''oldTs''', when your detector needs to run, simply only run it if(oldTS < msg.parachute.timestamp) {run detector}
+Lets call this ```oldTs```, when your detector needs to run, simply only run it ```if(oldTS < msg.parachute.timestamp) {run detector}```
                                                                                                                    
-## One more quick note on the central message object
+### One more quick note on the central message object
 The **msg** object is declared globally so you can access your topics anywhere!
-
+```msg.getData()``` returns a string (hopefully will change to a char* soon) containing all data stored by the message object in a predictable order that the groundstation expects and automatically parses.
+                                                                                                                      
+                                                                                                                      
+                                                                                                                      
+## Telemetry 
+Now the fun part! Running **runProcessing.py** from inside /Groundstation/Backend will listen to serial data from something like an xbee split it into topics and publish it to your friendly local MQTT broker (tested with mosquitto), you just need to change the hostname in generateGSCode.py (will fix soon!). 
+Then to visualize the data you should be able to use Grafana, or plotjuggler.
+![RX1_telemetry](https://user-images.githubusercontent.com/47725944/147837025-ddf2a6e5-edc9-43ac-ac8d-1b8d3db4a939.gif)
+                                                                                                                      
+                                                                                                                      
+                                                                                                                    
                                                                             
   
 
