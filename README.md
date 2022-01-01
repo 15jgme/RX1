@@ -40,6 +40,7 @@ Each line representing a variable must begin with its data type (eg int, float, 
 Next is the variable name this can be anything as its not sent to the groundstation each time
 
 Once you're finished you should have a file with rows looking like this (watch for unintentional spaces and mixing comments with message descriptions isn't supported yet)
+ 
   **parachute.msg**
   ```
   bool continuity
