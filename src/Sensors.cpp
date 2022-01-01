@@ -6,21 +6,26 @@
 
 #include "Sensors.h"
 
+/* Set the delay between fresh samples */
+#define BNO055_SAMPLERATE_DELAY_MS (100)
+
 Sensors::Sensors(messages *msgPtr)
 {
     msg = msgPtr;
     Wire.begin();
 }
 
-Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
+Adafruit_BNO055 bno; 
 Adafruit_BMP280 bmp; 
 
 void Sensors::innitialize()
 {
+    bno = Adafruit_BNO055(55, 0x28);
     if (!bno.begin())
     {
         SerialUSB.print("No BNO055 detected");
     }
+    bno.setExtCrystalUse(true);
     bmp.begin(0x76);
     bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,Adafruit_BMP280::SAMPLING_X2,Adafruit_BMP280::SAMPLING_X16,Adafruit_BMP280::FILTER_X16,Adafruit_BMP280::STANDBY_MS_500);
 }

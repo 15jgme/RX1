@@ -21,9 +21,10 @@ class RX1_comms:
     
     def update(self):
         if self.firstRun:
-            self.dev.flush
+            self.dev.flush()
             self.firstRun = False
         self.msg = str(self.dev.readline()[0: -2].decode("utf-8"))
         self.data = list(map(float, self.msg.split(",")))
+        self.dev.flushInput()
         
         

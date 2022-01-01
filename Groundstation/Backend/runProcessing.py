@@ -31,25 +31,26 @@ t0 = 0
 
 
 while(True):
-    if(firstRow):
-        writer.writerow(RX1.names)
-        firstRow = False
-    RX1.update()
+    if RX1.dev.in_waiting:
+        if(firstRow):
+            writer.writerow(RX1.names)
+            firstRow = False
+        RX1.update()
 
-    # print(RX1.data)
-    # print(RX1.names)
-    writer.writerow(RX1.data)
-    if firstRun:
-        firstRun = False
-    elif t0Set:
-        data.update(RX1.data)
+        # print(RX1.data)
+        # print(RX1.names)
+        writer.writerow(RX1.data)
+        if firstRun:
+            firstRun = False
+        elif t0Set:
+            data.update(RX1.data)
 
-    # We need to figure out what time the rocket started up at assuming  
-    if not t0Set:
-        indxs = [i for i,val in enumerate(RX1.names) if val=="timestamp"]
-        t0 = RX1.data[indxs[1]]
-        for k in range(0, len(indxs)):
-            if t0 > RX1.data[indxs[1]]:
-                t0 = RX1.data[indxs[1]]
-        t0Set = True
-        data.t0 = current_milli_time() - (t0 / 1000) - 2000
+        # We need to figure out what time the rocket started up at assuming  
+        if not t0Set:
+            indxs = [i for i,val in enumerate(RX1.names) if val=="timestamp"]
+            t0 = RX1.data[indxs[1]]
+            for k in range(0, len(indxs)):
+                if t0 > RX1.data[indxs[1]]:
+                    t0 = RX1.data[indxs[1]]
+            t0Set = True
+            data.t0 = current_milli_time() - (t0 / 1000) - 2000
