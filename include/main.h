@@ -6,3 +6,4 @@
 #include "messages.h"
 #include "Sensors.h"
 #include "Batt.h"
+#include "Logging.h"

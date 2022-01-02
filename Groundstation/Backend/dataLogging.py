@@ -18,7 +18,7 @@ class dataLogging:
             self.oldData = newData
             self.firstRun = False
 
-        if round(self.oldData[0]) != round(newData[0]):
+        if (round(self.oldData[0]) != round(newData[0])) or self.firstRun:
             dict ={
                 'altitude_m' : newData[1],
                 'pressure' : newData[2],
@@ -26,7 +26,7 @@ class dataLogging:
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/altitude", datJson)
-        if round(self.oldData[4]) != round(newData[4]):
+        if (round(self.oldData[4]) != round(newData[4])) or self.firstRun:
             dict ={
                 'q1' : newData[5],
                 'q2' : newData[6],
@@ -41,14 +41,14 @@ class dataLogging:
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/attitude", datJson)
-        if round(self.oldData[15]) != round(newData[15]):
+        if (round(self.oldData[15]) != round(newData[15])) or self.firstRun:
             dict ={
                 'voltage' : newData[16],
                 'capacity' : newData[17],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/battery", datJson)
-        if round(self.oldData[18]) != round(newData[18]):
+        if (round(self.oldData[18]) != round(newData[18])) or self.firstRun:
             dict ={
                 'em1_firing' : newData[19],
                 'em1_fired' : newData[20],
@@ -61,7 +61,7 @@ class dataLogging:
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/ematch", datJson)
-        if round(self.oldData[27]) != round(newData[27]):
+        if (round(self.oldData[27]) != round(newData[27])) or self.firstRun:
             dict ={
                 'a1' : newData[28],
                 'a2' : newData[29],
@@ -69,9 +69,11 @@ class dataLogging:
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/position", datJson)
-        if round(self.oldData[31]) != round(newData[31]):
+        if (round(self.oldData[31]) != round(newData[31])) or self.firstRun:
             dict ={
                 'state' : newData[32],
+                'sddetect' : newData[33],
+                'sdok' : newData[34],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/commander", datJson)

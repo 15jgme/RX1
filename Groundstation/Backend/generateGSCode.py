@@ -42,7 +42,7 @@ with open(file_path) as file:
         filename = message_list[-1] + ".msg"
         path = "../../messages/message_list/" + filename
         list_of_lists = []
-        print("        if round(self.oldData[" + str(i) + "]) != round(newData[" + str(i) + "]):", file = f)
+        print("        if (round(self.oldData[" + str(i) + "]) != round(newData[" + str(i) + "])) or self.firstRun:", file = f)
         print("            dict ={", file = f)
         # print("            \'timestamp\' : newData[" + str(i) + "],", file=f)
         i = i + 1
