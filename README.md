@@ -1,15 +1,12 @@
 # RX1
 
 The goal of this project is to build portable, and expansible flight software for hobby sized rockets.
-While TVC is the pie in the sky, this repo will be setup so that a controller can be imported, but one won't be made publically available.
 
 The main goals of the software are
 
 - Telemetry
 - Data logging 
-- Parachute control
-- State estimation
-- Servo control
+- Parachute firing
 
 
 ![RX1_telemetry](https://user-images.githubusercontent.com/47725944/147862830-8f2830b0-9bee-4732-97de-6765282f4972.gif)
