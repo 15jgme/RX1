@@ -12,7 +12,7 @@ The main goals of the software are
 - Servo control
 
 
-![RX1_telemetry](https://user-images.githubusercontent.com/47725944/147837025-ddf2a6e5-edc9-43ac-ac8d-1b8d3db4a939.gif)
+![RX1_telemetry](https://user-images.githubusercontent.com/47725944/147862830-8f2830b0-9bee-4732-97de-6765282f4972.gif)
 
 ## Short term goals
 
