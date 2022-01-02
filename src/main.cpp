@@ -9,7 +9,7 @@ Batt batt(msgPtr);
 void setup() {
   SerialUSB.begin(115200);
   Serial3.begin(9600);
-  delay(50);
+  delay(500);
   msg.battery_t.setcapacity(99.0f);
   sens.innitialize();
 }

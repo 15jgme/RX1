@@ -33,7 +33,7 @@ void Sensors::innitialize()
 void Sensors::update(void)
 {
 
-    bno.getEvent(&SensorsData, Adafruit_BNO055::VECTOR_EULER);
+    // bno.getEvent(&SensorsData, Adafruit_BNO055::VECTOR_EULER);
     bno.getEvent(&angVelData, Adafruit_BNO055::VECTOR_GYROSCOPE);
     bno.getEvent(&linearAccelData, Adafruit_BNO055::VECTOR_LINEARACCEL);
     bno.getEvent(&mainEvent);
@@ -51,9 +51,9 @@ void Sensors::update(void)
     msg->position_t.seta3((float)linearAccelData.acceleration.z);
 
     //Update gyro
-    msg->attitude_t.setw1((float)mainEvent.gyro.x);
-    msg->attitude_t.setw2((float)mainEvent.gyro.y);
-    msg->attitude_t.setw3((float)mainEvent.gyro.z);
+    msg->attitude_t.setw1((float)angVelData.gyro.x);
+    msg->attitude_t.setw2((float)angVelData.gyro.y);
+    msg->attitude_t.setw3((float)angVelData.gyro.z);
 
     //Update altimeter
     msg->altitude_t.setaltitude_m(bmp.readAltitude(1013.25));
