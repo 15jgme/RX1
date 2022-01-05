@@ -38,7 +38,6 @@ void Sensors::update(void)
     bno.getEvent(&linearAccelData, Adafruit_BNO055::VECTOR_LINEARACCEL);
     bno.getEvent(&mainEvent);
 
-
     imu::Quaternion quat = bno.getQuat();
     msg->attitude_t.setq1((float)quat.w());
     msg->attitude_t.setq2((float)quat.x());
