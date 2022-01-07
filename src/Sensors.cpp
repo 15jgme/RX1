@@ -4,6 +4,7 @@
 #define BNO055_SAMPLERATE_DELAY_MS (100)
 
 extern messages msg;
+extern String errMsg;
 
 Sensors::Sensors(messages *msgPtr)
 {
@@ -24,9 +25,17 @@ void Sensors::innitialize()
 {
     bno = Adafruit_BNO055(55, 0x28);
     
-    msg.commander_t.setsyshealth(bno.begin() && msg.commander_t.getsyshealth());
-    msg.commander_t.setsyshealth(bmp.begin(0x76) && msg.commander_t.getsyshealth());
-    
+    if(!bno.begin())
+    {
+        msg.commander_t.setsyshealth(0 && msg.commander_t.getsyshealth());
+        errMsg = "IMU initialization error";
+    }
+    if(!bmp.begin(0x76))
+    {
+        msg.commander_t.setsyshealth(0 && msg.commander_t.getsyshealth());
+        errMsg = "Baro initialization error";
+    }
+
     bno.setExtCrystalUse(true);
     bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,Adafruit_BMP280::SAMPLING_X2,Adafruit_BMP280::SAMPLING_X16,Adafruit_BMP280::FILTER_X16,Adafruit_BMP280::STANDBY_MS_500);
 }

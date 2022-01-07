@@ -1,5 +1,7 @@
 #include "Batt.h"
 
+extern String errMsg;
+
 Batt::Batt(){}
 
 void Batt::update()
@@ -13,5 +15,8 @@ void Batt::update()
 
     msg.battery_t.setvoltage(volt);
     msg.battery_t.setcapacity(cap);
-    msg.commander_t.setsyshealth( msg.commander_t.getsyshealth() > 50.0f); // update total health
+    if( cap < 50.0f){
+        msg.commander_t.setsyshealth( msg.commander_t.getsyshealth() &&  cap > 50.0f); // update total health
+        errMsg = "Low battery";
+    }
 }

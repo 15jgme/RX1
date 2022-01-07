@@ -8,3 +8,4 @@
 #include "Batt.h"
 #include "Logging.h"
 #include "IndicatorLed.h"
+#include "Command.h"

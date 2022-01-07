@@ -17,7 +17,7 @@ void Command::update()
     switch (msg.commander_t.getstate())
     {
     case 0:
-        runAbort();
+        // runAbort();
         break;
     case 1:
         runStartup();
@@ -26,12 +26,13 @@ void Command::update()
         runGroundIdle();
         break;
     case 3:
-        runFlight();
+        // runFlight();
         break;
     case 4:
-        runApogee();
+        // runApogee();
     case 5:
-        runParachute();
+        // runParachute();
+        break;
     default:
         break;
     }
@@ -55,7 +56,7 @@ void Command::setGroundIdle()
     tman.setSlot(3, _5_HZ);   // LED
     tman.setSlot(4, _1_HZ);   // Battery
 
-    msg.commander_t.setstate(1);
+    msg.commander_t.setstate(2);
 }
 
 void Command::runGroundIdle()

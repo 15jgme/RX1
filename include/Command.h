@@ -30,21 +30,21 @@ private:
     int i = 0;
 public:
     Command();
-    
+
     void update();
     void runStartup();
     void runGroundIdle();
     void runFlight();
     void runApogee();
+    void runAbort();
     void runParachute();
 
     void setStartup();
     void setGroundIdle();
     void setFlight();
     void setApogee();
+    void setAbort();
     void setParachute();
-
-    void runAbort();
 
     void runProj();
 };
