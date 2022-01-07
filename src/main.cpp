@@ -1,11 +1,7 @@
 #include "main.h"
 
 messages msg;
-messages *msgPtr = & msg;
-Sensors sens(msgPtr);
-Batt batt(msgPtr);
-Logging logger(msgPtr);
-IndicatorLed led;
+commander cmd;
 
 
 void setup() {
@@ -15,11 +11,7 @@ void setup() {
 }
 
 void loop() {
-  // SerialUSB.println(msg.getData());
   Serial3.println(msg.getData());
-  sens.update();
-  batt.update();
-  logger.writeData();
   msg.commander_t.setstate(5);
   delay(20);
 }

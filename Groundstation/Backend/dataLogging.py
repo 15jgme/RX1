@@ -74,6 +74,7 @@ class dataLogging:
                 'state' : newData[32],
                 'sddetect' : newData[33],
                 'sdok' : newData[34],
+                'syshealth' : newData[35],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/commander", datJson)
