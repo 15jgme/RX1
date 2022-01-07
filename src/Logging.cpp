@@ -5,18 +5,14 @@
 #define SD_DETECT_PIN SD_DETECT_NONE
 #endif
 
-
-Logging::Logging(messages *msgPtr)
-{
-    msg = msgPtr;
-}
+Logging::Logging(){}
 
 void Logging::init()
 {
     //Initialize the card
-    while(!msg->commander_t.getsddetect()) 
+    while(!msg.commander_t.getsddetect()) 
     {    
-        msg->commander_t.setsddetect(SD.begin(SD_DETECT_PIN));
+        msg.commander_t.setsddetect(SD.begin(SD_DETECT_PIN));
     }
 
     //Check for an available file to log to
@@ -28,20 +24,21 @@ void Logging::init()
     
 
     log = SD.open(fileName.c_str(), FILE_WRITE);
-    msg->commander_t.setsdok(log); /* False if file not loaded */
+    msg.commander_t.setsdok(log); /* False if file not loaded */
+    msg.commander_t.setsyshealth( log && msg.commander_t.getsddetect() && msg.commander_t.getsyshealth());
 
     if (log) {
         log.seek(log.size());
     }
-    String out = msg->getNames();
+    String out = msg.getNames();
     log.println(out); log.flush();
 }
 
 void Logging::writeData()
 {
-    if(msg->commander_t.getsdok())
+    if(msg.commander_t.getsdok())
     {
-        String out = msg->getData();
+        String out = msg.getData();
         log.println(out);
         log.flush();
     }

@@ -1,9 +1,6 @@
 #include "Batt.h"
 
-Batt::Batt(messages *msgPtr)
-{
-    msg = msgPtr;
-}
+Batt::Batt(){}
 
 void Batt::update()
 {
@@ -14,6 +11,7 @@ void Batt::update()
     if(cap > 100.0){cap = 100.0;}
     if(cap < 0.0){cap = 0.0;}
 
-    msg->battery_t.setvoltage(volt);
-    msg->battery_t.setcapacity(cap);
+    msg.battery_t.setvoltage(volt);
+    msg.battery_t.setcapacity(cap);
+    msg.commander_t.setsyshealth( msg.commander_t.getsyshealth() > 50.0f); // update total health
 }
