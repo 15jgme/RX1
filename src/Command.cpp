@@ -1,15 +1,21 @@
 #include "Command.h"
 
-Command::Command()
+Command::Command(){msg.commander_t.setsyshealth(1); /*Set to good initially*/}
+
+void Command::init()
 {
+    msg.commander_t.setstate(1);
     tman.setSlot(0, _100_HZ); // Sensors slot
     tman.setSlot(1, _100_HZ); // Logging slot
     tman.setSlot(2, _10_HZ);  // Telemetry
     tman.setSlot(3, _5_HZ);   // LED
     tman.setSlot(4, _1_HZ);   // Battery
 
+    delay(500); // Let the BNO055 boot up
     sens.innitialize();
     logger.init();
+    led.init();
+    tel.init();
 }
 
 void Command::update()
@@ -17,7 +23,7 @@ void Command::update()
     switch (msg.commander_t.getstate())
     {
     case 0:
-        runAbort();
+        // runAbort();
         break;
     case 1:
         runStartup();
@@ -26,12 +32,13 @@ void Command::update()
         runGroundIdle();
         break;
     case 3:
-        runFlight();
+        // runFlight();
         break;
     case 4:
-        runApogee();
+        // runApogee();
     case 5:
-        runParachute();
+        // runParachute();
+        break;
     default:
         break;
     }
@@ -43,7 +50,7 @@ void Command::runStartup()
     { 
         setGroundIdle(); 
     }
-    runProj();
+    runProj(tman.nextToRun());
 }
 
 void Command::setGroundIdle()
@@ -55,18 +62,22 @@ void Command::setGroundIdle()
     tman.setSlot(3, _5_HZ);   // LED
     tman.setSlot(4, _1_HZ);   // Battery
 
-    msg.commander_t.setstate(1);
+    msg.commander_t.setstate(2);
 }
 
 void Command::runGroundIdle()
-{
-    runProj();
+{ 
+    i = tman.nextToRun();
+    runProj(i);
+    // SerialUSB.println(i);
 }
 
-void Command::runProj()
+void Command::runProj(int runIdx)
 {
-    switch(tman.nextToRun())
+    switch(runIdx)
     {
+        case -1:
+            break;
         case 0:
             sens.update();
             break;
@@ -74,12 +85,14 @@ void Command::runProj()
             logger.writeData();
             break;
         case 2:
-            // tel.update()
+            tel.update();
             break;
         case 3:
             led.update();
             break;
-        // case 4:
+        case 4:
+            batt.update();
+            break;
             
     }
 }
