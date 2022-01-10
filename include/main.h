@@ -9,3 +9,4 @@
 #include "Logging.h"
 #include "IndicatorLed.h"
 #include "Command.h"
+#include "Telemetry.h"

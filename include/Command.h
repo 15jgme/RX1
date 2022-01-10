@@ -14,7 +14,7 @@
 #include "messages.h"
 #include "Timeman.h"
 
-// extern messages msg; //This is probably what I want
+extern messages msg; //This is probably what I want
 
 class Command
 {
@@ -26,10 +26,13 @@ private:
     Batt batt;
     Logging logger;
     IndicatorLed led;
+    Telemetry tel;
     // 1 = sensors; 2 = control; 3 = logging; 4 = telemetry; 5 = parachute;
     int i = 0;
+    int toRun = 0;
 public:
     Command();
+    void init();
 
     void update();
     void runStartup();
@@ -46,7 +49,7 @@ public:
     void setAbort();
     void setParachute();
 
-    void runProj();
+    void runProj(int runIdx);
 };
 
 

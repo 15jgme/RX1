@@ -24,11 +24,8 @@ elif str(args).lower() == "--h":
     print("Commands:")
     print("build_messages : builds c++ messages and telemetry code, ran after modifying messages")
     print("clear_logs: deletes all telemetry stored logs")
-else:
-    print("unrecognized command")
-    print("use --h for help")
 
-if str(args).lower() == "clear_logs":
+elif str(args).lower() == "clear_logs":
     print("Are you sure? This will erase all stored telemetry logs and cannot be undone!")
     inp = input("(N/y)")
     if(inp.lower() == "n" or inp.lower() == ""):
@@ -44,5 +41,14 @@ if str(args).lower() == "clear_logs":
                 except Exception as e:
                     print('Failed to delete %s. Reason: %s' % (file_path, e))
         print("Done")
-        
+elif str(args).lower() == "run_gs":
+    os.chdir(path + "\Groundstation\Backend")
+    os.system("python " + path + r"\Groundstation\Backend\runProcessing.py")
+    try:
+        os.system("python " + path + r"\Groundstation\Backend\runProcessing.py")
+    except KeyboardInterrupt:
+        pass
+else:
+    print("unrecognized command")
+    print("use --h for help")    
 print("Complete, exiting...")
