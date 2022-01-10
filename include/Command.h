@@ -11,7 +11,7 @@
 
 #include <Arduino.h>
 #include "main.h"
-#include "messages.h"
+#include "messages/messages.h"
 #include "Timeman.h"
 
 extern messages msg; //This is probably what I want

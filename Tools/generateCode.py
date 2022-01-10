@@ -20,7 +20,7 @@ topic_names_list = []
 
 #Message class header generator function
 def genHeader(name, vabList):
-    cpp = CppFile("../include/"+name + ".h") 
+    cpp = CppFile("../include/messages/"+name + ".h") 
     cpp("#include <Arduino.h>")
     cpp("#ifndef " + name.upper() + "_H")
     cpp("#define " + name.upper() + "_H")
@@ -54,7 +54,7 @@ def genHeader(name, vabList):
 #Message class implimentation generator function
 def genClass(name, vabList):
     cpp = CppFile("../src/messages/" + name + ".cpp")
-    cpp("#include \"" + name + ".h\"")
+    cpp("#include \"messages/" + name + ".h\"")
     cpp.newline(3)
     cpp(name + "::" + name + "(){}")
 
@@ -94,7 +94,7 @@ def genClass(name, vabList):
 
 #Message class
 def genMsgHeader(nameList):
-    cpp = CppFile("../include/messages.h") 
+    cpp = CppFile("../include/messages/messages.h") 
     cpp("#ifndef MESSAGES_H")
     cpp("#define MESSAGES_H")
     cpp("#include <arduino.h>")
@@ -112,7 +112,7 @@ def genMsgHeader(nameList):
 
 def genMsgClass(nameList):
     cpp = CppFile("../src/messages/messages.cpp")
-    cpp("#include \"messages.h\"")
+    cpp("#include \"messages/messages.h\"")
     cpp.newline(1)
     cpp("messages::messages(){}")
 

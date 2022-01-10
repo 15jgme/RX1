@@ -3,7 +3,7 @@
 #include <HardwareSerial.h>
 #include <Wire.h>
 
-#include "messages.h"
+#include "messages/messages.h"
 #include "Sensors.h"
 #include "Batt.h"
 #include "Logging.h"
