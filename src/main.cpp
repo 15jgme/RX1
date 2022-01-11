@@ -8,7 +8,6 @@ String errMsg; //Holds most recent critical error message
 void setup() {
   SerialUSB.begin(115200);
   cmd.init();
-  while(!SerialUSB.available()){}
 }
 
 void loop() {

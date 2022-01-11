@@ -32,7 +32,7 @@ void Command::update()
         runGroundIdle();
         break;
     case 3:
-        // runFlight();
+        runFlight();
         break;
     case 4:
         // runApogee();
@@ -65,11 +65,49 @@ void Command::setGroundIdle()
     msg.commander_t.setstate(2);
 }
 
+void Command::setFlight()
+{
+    led.setBlue(); led.update();
+    tman.setSlot(0, _100_HZ); // Sensors slot
+    tman.setSlot(1, _50_HZ); // Logging slot
+    tman.setSlot(2, _5_HZ);  // Telemetry
+    tman.setSlot(3, _1_HZ);   // LED
+    tman.setSlot(4, _1_HZ);   // Battery
+
+    msg.commander_t.setstate(3);
+}
+
 void Command::runGroundIdle()
 { 
     i = tman.nextToRun();
     runProj(i);
-    // SerialUSB.println(i);
+    if(checkLaunch())
+    {
+        setFlight();
+    }
+}
+
+void Command::runFlight()
+{ 
+    i = tman.nextToRun();
+    runProj(i);
+}
+
+int Command::checkLaunch()
+{
+    if(msg.position_t.geta3() > LIFT_LIMIT)
+    {
+        liftCount++;
+        if(liftCount > LIFT_COUNT_MAX)
+        {
+            return 1;
+        }
+    }
+    else
+    {
+        liftCount = 0;
+    }
+    return 0;
 }
 
 void Command::runProj(int runIdx)
