@@ -12,7 +12,7 @@ from code_generator import *
 
 script_path = os.path.realpath(__file__)
 parent_path = os.path.dirname(os.path.dirname(script_path))
-file_path = os.path.join(os.path.sep,parent_path,"messages", "message_list","makelist.txt")
+file_path = os.path.join(os.path.sep,parent_path,"message_list","makelist.txt")
 
 #Variables list this stores the names of data output by the getData function in the correct order.
 vab_names_list = []
@@ -145,7 +145,7 @@ with open(file_path) as file:
         #Read message build list
         message_list.append(line.rstrip())
         filename = message_list[-1] + ".msg"
-        path = os.path.join(os.path.sep,parent_path,"messages", "message_list", filename)
+        path = os.path.join(os.path.sep,parent_path,"message_list", filename)
         list_of_lists = []
 
         #Read desired variables for all messages in message list

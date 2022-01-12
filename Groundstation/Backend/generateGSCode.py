@@ -1,6 +1,6 @@
 initVals = True # true if variales should be initialized with zeros/false
 
-file_path = "../../messages/message_list/makelist.txt"
+file_path = "../../message_list/makelist.txt"
 
 #Variables list this stores the names of data output by the getData function in the correct order.
 vab_names_list = []
@@ -40,7 +40,7 @@ with open(file_path) as file:
         #Read message build list
         message_list.append(line.rstrip())
         filename = message_list[-1] + ".msg"
-        path = "../../messages/message_list/" + filename
+        path = "../../message_list/" + filename
         list_of_lists = []
         print("        if (round(self.oldData[" + str(i) + "]) != round(newData[" + str(i) + "])) or self.firstRun:", file = f)
         print("            dict ={", file = f)
