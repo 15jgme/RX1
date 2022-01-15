@@ -16,6 +16,7 @@ void Command::init()
     logger.init();
     led.init();
     tel.init();
+    serv.init();
 }
 
 void Command::update()
@@ -36,9 +37,6 @@ void Command::update()
         break;
     case 4:
         // runApogee();
-    case 5:
-        // runParachute();
-        break;
     default:
         break;
     }
@@ -73,8 +71,23 @@ void Command::setFlight()
     tman.setSlot(2, _5_HZ);  // Telemetry
     tman.setSlot(3, _1_HZ);   // LED
     tman.setSlot(4, _1_HZ);   // Battery
+    tman.setSlot(5, _25_HZ); //Motor mount
 
     msg.commander_t.setstate(3);
+
+    par.Arm();
+}
+
+void Command::setParachute()
+{
+    tman.setSlot(0, _100_HZ); // Sensors slot
+    tman.setSlot(1, _50_HZ); // Logging slot
+    tman.setSlot(2, _5_HZ);  // Telemetry
+    tman.setSlot(3, _1_HZ);   // LED
+    tman.setSlot(4, _1_HZ);   // Battery
+
+    par.Fire();
+    par.update();
 }
 
 void Command::runGroundIdle()
@@ -130,6 +143,9 @@ void Command::runProj(int runIdx)
             break;
         case 4:
             batt.update();
+            break;
+        case 5:
+            serv.update();
             break;
             
     }

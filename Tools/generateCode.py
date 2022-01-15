@@ -25,10 +25,6 @@ def genHeader(name, vabList):
     cpp("#ifndef " + name.upper() + "_H")
     cpp("#define " + name.upper() + "_H")
     with cpp.block("class " + name, ";"):
-        # Timestamp
-        cpp("uint32_t timestamp = 0;") #maximum runtime around 71 mins before overflow 
-        vab_names_list.append("timestamp")
-        
         # Make variables
         for i in range(0,len(vabList)): 
             if initVals:
@@ -41,6 +37,9 @@ def genHeader(name, vabList):
             else:
                 cpp(vabList[i][0] + " " + vabList[i][1] + " = 0.0f;")
         cpp.label('public')
+        # Timestamp
+        cpp("uint32_t timestamp = 0;") #maximum runtime around 71 mins before overflow 
+        vab_names_list.append("timestamp")
         #Variable access functions
         for i in range(0,len(vabList)):
             cpp("void set" + vabList[i][1] + "(" + vabList[i][0] + " newVal);") #set 

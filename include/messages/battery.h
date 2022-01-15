@@ -3,10 +3,10 @@
 #define BATTERY_H
 class battery
 {
-	uint32_t timestamp = 0;
 	float voltage = 0.0f;
 	float capacity = 0.0f;
 public:
+	uint32_t timestamp = 0;
 	void setvoltage(float newVal);
 	float getvoltage();
 	void setcapacity(float newVal);

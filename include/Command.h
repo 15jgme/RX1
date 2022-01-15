@@ -30,6 +30,8 @@ private:
     Logging logger;
     IndicatorLed led;
     Telemetry tel;
+    Parachute par;
+    Serv serv;
 
     int liftCount = 0;
     // 1 = sensors; 2 = control; 3 = logging; 4 = telemetry; 5 = parachute;

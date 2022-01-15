@@ -3,11 +3,11 @@
 #define POSITION_H
 class position
 {
-	uint32_t timestamp = 0;
 	float a1 = 0.0f;
 	float a2 = 0.0f;
 	float a3 = 0.0f;
 public:
+	uint32_t timestamp = 0;
 	void seta1(float newVal);
 	float geta1();
 	void seta2(float newVal);

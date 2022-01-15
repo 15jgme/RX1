@@ -10,3 +10,5 @@
 #include "IndicatorLed.h"
 #include "Command.h"
 #include "Telemetry.h"
+#include "Parachute.h"
+#include "Serv.h"
