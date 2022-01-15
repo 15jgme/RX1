@@ -2,7 +2,7 @@
 #define LOGGING_H
 
 #include <STM32SD.h>
-#include "messages.h"
+#include "messages/messages.h"
 
 extern messages msg;
 class Logging

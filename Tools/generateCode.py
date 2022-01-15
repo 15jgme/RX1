@@ -12,7 +12,7 @@ from code_generator import *
 
 script_path = os.path.realpath(__file__)
 parent_path = os.path.dirname(os.path.dirname(script_path))
-file_path = os.path.join(os.path.sep,parent_path,"messages", "message_list","makelist.txt")
+file_path = os.path.join(os.path.sep,parent_path,"message_list","makelist.txt")
 
 #Variables list this stores the names of data output by the getData function in the correct order.
 vab_names_list = []
@@ -20,15 +20,11 @@ topic_names_list = []
 
 #Message class header generator function
 def genHeader(name, vabList):
-    cpp = CppFile("../include/"+name + ".h") 
+    cpp = CppFile("../include/messages/"+name + ".h") 
     cpp("#include <Arduino.h>")
     cpp("#ifndef " + name.upper() + "_H")
     cpp("#define " + name.upper() + "_H")
     with cpp.block("class " + name, ";"):
-        # Timestamp
-        cpp("uint32_t timestamp = 0;") #maximum runtime around 71 mins before overflow 
-        vab_names_list.append("timestamp")
-        
         # Make variables
         for i in range(0,len(vabList)): 
             if initVals:
@@ -41,6 +37,9 @@ def genHeader(name, vabList):
             else:
                 cpp(vabList[i][0] + " " + vabList[i][1] + " = 0.0f;")
         cpp.label('public')
+        # Timestamp
+        cpp("uint32_t timestamp = 0;") #maximum runtime around 71 mins before overflow 
+        vab_names_list.append("timestamp")
         #Variable access functions
         for i in range(0,len(vabList)):
             cpp("void set" + vabList[i][1] + "(" + vabList[i][0] + " newVal);") #set 
@@ -54,7 +53,7 @@ def genHeader(name, vabList):
 #Message class implimentation generator function
 def genClass(name, vabList):
     cpp = CppFile("../src/messages/" + name + ".cpp")
-    cpp("#include \"" + name + ".h\"")
+    cpp("#include \"messages/" + name + ".h\"")
     cpp.newline(3)
     cpp(name + "::" + name + "(){}")
 
@@ -94,7 +93,7 @@ def genClass(name, vabList):
 
 #Message class
 def genMsgHeader(nameList):
-    cpp = CppFile("../include/messages.h") 
+    cpp = CppFile("../include/messages/messages.h") 
     cpp("#ifndef MESSAGES_H")
     cpp("#define MESSAGES_H")
     cpp("#include <arduino.h>")
@@ -112,7 +111,7 @@ def genMsgHeader(nameList):
 
 def genMsgClass(nameList):
     cpp = CppFile("../src/messages/messages.cpp")
-    cpp("#include \"messages.h\"")
+    cpp("#include \"messages/messages.h\"")
     cpp.newline(1)
     cpp("messages::messages(){}")
 
@@ -145,7 +144,7 @@ with open(file_path) as file:
         #Read message build list
         message_list.append(line.rstrip())
         filename = message_list[-1] + ".msg"
-        path = os.path.join(os.path.sep,parent_path,"messages", "message_list", filename)
+        path = os.path.join(os.path.sep,parent_path,"message_list", filename)
         list_of_lists = []
 
         #Read desired variables for all messages in message list

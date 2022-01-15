@@ -9,9 +9,12 @@
 #define _100_HZ uint32_t(0.01 * 1e6)
 #define _200_HZ uint32_t(0.005 * 1e6)
 
+#define LIFT_LIMIT 3
+#define LIFT_COUNT_MAX 20
+
 #include <Arduino.h>
 #include "main.h"
-#include "messages.h"
+#include "messages/messages.h"
 #include "Timeman.h"
 
 extern messages msg; //This is probably what I want
@@ -27,6 +30,10 @@ private:
     Logging logger;
     IndicatorLed led;
     Telemetry tel;
+    Parachute par;
+    Serv serv;
+
+    int liftCount = 0;
     // 1 = sensors; 2 = control; 3 = logging; 4 = telemetry; 5 = parachute;
     int i = 0;
     int toRun = 0;
@@ -50,6 +57,7 @@ public:
     void setParachute();
 
     void runProj(int runIdx);
+    int checkLaunch();
 };
 
 

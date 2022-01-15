@@ -3,12 +3,12 @@
 #define COMMANDER_H
 class commander
 {
-	uint32_t timestamp = 0;
 	int state = 0.0f;
 	bool sddetect = false;
 	bool sdok = false;
 	bool syshealth = false;
 public:
+	uint32_t timestamp = 0;
 	void setstate(int newVal);
 	int getstate();
 	void setsddetect(bool newVal);

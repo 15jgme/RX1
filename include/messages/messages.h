@@ -7,6 +7,7 @@
 #include "ematch.h"
 #include "position.h"
 #include "commander.h"
+#include "motormnt.h"
 class messages
 {
 public:
@@ -17,6 +18,7 @@ public:
 	ematch ematch_t;
 	position position_t;
 	commander commander_t;
+	motormnt motormnt_t;
 	String getData();
 	String getNames();
 };

@@ -54,27 +54,32 @@ class dataLogging:
                 'em1_fired' : newData[20],
                 'em1_safe' : newData[21],
                 'em1_continuity' : newData[22],
-                'em2_firing' : newData[23],
-                'em2_fired' : newData[24],
-                'em2_safe' : newData[25],
-                'em2_continuity' : newData[26],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/ematch", datJson)
-        if (round(self.oldData[27]) != round(newData[27])) or self.firstRun:
+        if (round(self.oldData[23]) != round(newData[23])) or self.firstRun:
             dict ={
-                'a1' : newData[28],
-                'a2' : newData[29],
-                'a3' : newData[30],
+                'a1' : newData[24],
+                'a2' : newData[25],
+                'a3' : newData[26],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/position", datJson)
-        if (round(self.oldData[31]) != round(newData[31])) or self.firstRun:
+        if (round(self.oldData[27]) != round(newData[27])) or self.firstRun:
             dict ={
-                'state' : newData[32],
-                'sddetect' : newData[33],
-                'sdok' : newData[34],
-                'syshealth' : newData[35],
+                'state' : newData[28],
+                'sddetect' : newData[29],
+                'sdok' : newData[30],
+                'syshealth' : newData[31],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/commander", datJson)
+        if (round(self.oldData[32]) != round(newData[32])) or self.firstRun:
+            dict ={
+                'sety' : newData[33],
+                'setz' : newData[34],
+                'offy' : newData[35],
+                'offz' : newData[36],
+            }
+            datJson = json.dumps(dict)
+            self.client.publish("RX1/motormnt", datJson)

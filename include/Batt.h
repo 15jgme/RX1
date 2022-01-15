@@ -1,7 +1,7 @@
 #ifndef BATT_H
 #define BATT_H
 
-#include "messages.h"
+#include "messages/messages.h"
 #include <Arduino.h>
 #include <stm32f4xx_hal.h>
 
