@@ -7,6 +7,8 @@ class dataLogging:
         self.t0 = 0
         self.oldData = []
         self.firstRun = True
+
+        self.i = 0
         
         broker_address="LAPTOP-R70PIQ08" 
         self.client = mqtt.Client("RX1_1") #create new instance
@@ -18,7 +20,7 @@ class dataLogging:
             self.oldData = newData
             self.firstRun = False
 
-        if (round(self.oldData[0]) != round(newData[0])) or self.firstRun:
+        if (round(self.oldData[0]) != round(newData[0])) or self.firstRun or (self.i % 20 == 0):
             dict ={
                 'altitude_m' : newData[1],
                 'pressure' : newData[2],
@@ -26,7 +28,7 @@ class dataLogging:
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/altitude", datJson)
-        if (round(self.oldData[4]) != round(newData[4])) or self.firstRun:
+        if (round(self.oldData[4]) != round(newData[4])) or self.firstRun or (self.i % 20 == 0):
             dict ={
                 'q1' : newData[5],
                 'q2' : newData[6],
@@ -35,51 +37,49 @@ class dataLogging:
                 'w1' : newData[9],
                 'w2' : newData[10],
                 'w3' : newData[11],
-                'alph1' : newData[12],
-                'alph2' : newData[13],
-                'alph3' : newData[14],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/attitude", datJson)
-        if (round(self.oldData[15]) != round(newData[15])) or self.firstRun:
+        if (round(self.oldData[12]) != round(newData[12])) or self.firstRun or (self.i % 20 == 0):
             dict ={
-                'voltage' : newData[16],
-                'capacity' : newData[17],
+                'voltage' : newData[13],
+                'capacity' : newData[14],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/battery", datJson)
-        if (round(self.oldData[18]) != round(newData[18])) or self.firstRun:
+        if (round(self.oldData[15]) != round(newData[15])) or self.firstRun or (self.i % 20 == 0):
             dict ={
-                'em1_firing' : newData[19],
-                'em1_fired' : newData[20],
-                'em1_safe' : newData[21],
-                'em1_continuity' : newData[22],
+                'em1_firing' : newData[16],
+                'em1_fired' : newData[17],
+                'em1_safe' : newData[18],
+                'em1_continuity' : newData[19],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/ematch", datJson)
-        if (round(self.oldData[23]) != round(newData[23])) or self.firstRun:
+        if (round(self.oldData[20]) != round(newData[20])) or self.firstRun or (self.i % 20 == 0):
             dict ={
-                'a1' : newData[24],
-                'a2' : newData[25],
-                'a3' : newData[26],
+                'a1' : newData[21],
+                'a2' : newData[22],
+                'a3' : newData[23],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/position", datJson)
-        if (round(self.oldData[27]) != round(newData[27])) or self.firstRun:
+        if (round(self.oldData[24]) != round(newData[24])) or self.firstRun or (self.i % 20 == 0):
             dict ={
-                'state' : newData[28],
-                'sddetect' : newData[29],
-                'sdok' : newData[30],
-                'syshealth' : newData[31],
+                'state' : newData[25],
+                'sddetect' : newData[26],
+                'sdok' : newData[27],
+                'syshealth' : newData[28],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/commander", datJson)
-        if (round(self.oldData[32]) != round(newData[32])) or self.firstRun:
+        if (round(self.oldData[29]) != round(newData[29])) or self.firstRun or (self.i % 20 == 0):
             dict ={
-                'sety' : newData[33],
-                'setz' : newData[34],
-                'offy' : newData[35],
-                'offz' : newData[36],
+                'sety' : newData[30],
+                'setz' : newData[31],
+                'offy' : newData[32],
+                'offz' : newData[33],
             }
             datJson = json.dumps(dict)
             self.client.publish("RX1/motormnt", datJson)
+        self.i = self.i + 1

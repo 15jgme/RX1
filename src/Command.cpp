@@ -17,6 +17,7 @@ void Command::init()
     led.init();
     tel.init();
     serv.init();
+    par.checkContinuity();
 }
 
 void Command::update()
@@ -24,7 +25,7 @@ void Command::update()
     switch (msg.commander_t.getstate())
     {
     case 0:
-        // runAbort();
+        runAbort();
         break;
     case 1:
         runStartup();
@@ -85,9 +86,29 @@ void Command::setParachute()
     tman.setSlot(2, _5_HZ);  // Telemetry
     tman.setSlot(3, _1_HZ);   // LED
     tman.setSlot(4, _1_HZ);   // Battery
+    tman.setSlot(5, _1_HZ); //Motor mount
+    tman.setSlot(6, _1_HZ);   // Parachute
 
     par.Fire();
     par.update();
+}
+
+void Command::setAbort()
+{
+    led.setRed(); led.update();
+
+    setParachute();
+
+    tman.setSlot(0, _50_HZ); // Sensors slot
+    tman.setSlot(1, _50_HZ); // Logging slot
+    tman.setSlot(2, _5_HZ);  // Telemetry
+    tman.setSlot(3, _1_HZ);   // LED
+    tman.setSlot(4, _1_HZ);   // Battery
+    tman.setSlot(5, _1_HZ); //Motor mount
+    tman.setSlot(6, _1_HZ);   // Parachute
+
+    msg.commander_t.setstate(0);
+
 }
 
 void Command::runGroundIdle()
@@ -104,11 +125,22 @@ void Command::runFlight()
 { 
     i = tman.nextToRun();
     runProj(i);
+    if(checkAbort())
+    {
+        setAbort();
+    }
 }
+
+void Command::runAbort()
+{ 
+    i = tman.nextToRun();
+    runProj(i);
+}
+
 
 int Command::checkLaunch()
 {
-    if(msg.position_t.geta3() > LIFT_LIMIT)
+    if(msg.position_t.geta1() > LIFT_LIMIT)
     {
         liftCount++;
         if(liftCount > LIFT_COUNT_MAX)
@@ -121,6 +153,19 @@ int Command::checkLaunch()
         liftCount = 0;
     }
     return 0;
+}
+
+int Command::checkAbort()
+{
+    attErr = acosf(abs(2*(msg.attitude_t.getq2()*msg.attitude_t.getq4() - msg.attitude_t.getq1()*msg.attitude_t.getq3())));
+    if(attErr*(180.0/3.14159) > ABORT_LIMIT)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 void Command::runProj(int runIdx)
@@ -146,6 +191,9 @@ void Command::runProj(int runIdx)
             break;
         case 5:
             serv.update();
+            break;
+        case 6:
+            par.update();
             break;
             
     }

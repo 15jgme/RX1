@@ -5,12 +5,12 @@
 attitude::attitude(){}
 String attitude::getData()
 {
-	String datMsg = String(timestamp)+","+String(q1)+","+String(q2)+","+String(q3)+","+String(q4)+","+String(w1)+","+String(w2)+","+String(w3)+","+String(alph1)+","+String(alph2)+","+String(alph3);
+	String datMsg = String(timestamp)+","+String(q1)+","+String(q2)+","+String(q3)+","+String(q4)+","+String(w1)+","+String(w2)+","+String(w3);
 	return datMsg;
 }
 String attitude::getNames()
 {
-	String nameMsg = "timestamp,"+String("q1")+","+String("q2")+","+String("q3")+","+String("q4")+","+String("w1")+","+String("w2")+","+String("w3")+","+String("alph1")+","+String("alph2")+","+String("alph3");
+	String nameMsg = "timestamp,"+String("q1")+","+String("q2")+","+String("q3")+","+String("q4")+","+String("w1")+","+String("w2")+","+String("w3");
 	return nameMsg;
 }
 float attitude::getq1()
@@ -88,38 +88,5 @@ void attitude::setw3(float newVal)
 {
 	if(newVal != w3){timestamp = micros();}
 	w3 = newVal;
-}
-
-float attitude::getalph1()
-{
-	return alph1;
-}
-
-void attitude::setalph1(float newVal)
-{
-	if(newVal != alph1){timestamp = micros();}
-	alph1 = newVal;
-}
-
-float attitude::getalph2()
-{
-	return alph2;
-}
-
-void attitude::setalph2(float newVal)
-{
-	if(newVal != alph2){timestamp = micros();}
-	alph2 = newVal;
-}
-
-float attitude::getalph3()
-{
-	return alph3;
-}
-
-void attitude::setalph3(float newVal)
-{
-	if(newVal != alph3){timestamp = micros();}
-	alph3 = newVal;
 }
 

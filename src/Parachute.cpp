@@ -32,7 +32,7 @@ void Parachute::Fire()
 
 void Parachute::update()
 {
-    if(!msg.ematch_t.getem1_safe() && msg.ematch_t.getem1_firing() && ((millis() - tf) > (uint32_t)(tf*1000)) )
+    if(!msg.ematch_t.getem1_safe() && msg.ematch_t.getem1_firing() && ((millis() - tf) > (uint32_t)(duration*1000)) )
     {
         digitalWrite(PIN_A0, LOW);
         msg.ematch_t.setem1_firing(false);
@@ -43,4 +43,3 @@ void Parachute::Arm()
 {
     msg.ematch_t.setem1_safe(false);
 }
-

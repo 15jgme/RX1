@@ -11,8 +11,5 @@ void setup() {
 }
 
 void loop() {
-  // Serial3.println(msg.getData());
-  // SerialUSB.println(msg.getData());
   cmd.update();
-  // delay(100);
 }

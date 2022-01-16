@@ -10,7 +10,9 @@
 #define _200_HZ uint32_t(0.005 * 1e6)
 
 #define LIFT_LIMIT 3
-#define LIFT_COUNT_MAX 20
+#define LIFT_COUNT_MAX 5
+
+#define ABORT_LIMIT 45
 
 #include <Arduino.h>
 #include "main.h"
@@ -37,6 +39,8 @@ private:
     // 1 = sensors; 2 = control; 3 = logging; 4 = telemetry; 5 = parachute;
     int i = 0;
     int toRun = 0;
+
+    float attErr = 0;
 public:
     Command();
     void init();
@@ -58,6 +62,7 @@ public:
 
     void runProj(int runIdx);
     int checkLaunch();
+    int checkAbort();
 };
 
 
