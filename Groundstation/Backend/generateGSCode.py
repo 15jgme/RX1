@@ -18,6 +18,8 @@ class dataLogging:
         self.t0 = 0
         self.oldData = []
         self.firstRun = True
+
+        self.i = 0
         
         broker_address="LAPTOP-R70PIQ08" 
         self.client = mqtt.Client("RX1_1") #create new instance
@@ -42,7 +44,7 @@ with open(file_path) as file:
         filename = message_list[-1] + ".msg"
         path = "../../message_list/" + filename
         list_of_lists = []
-        print("        if (round(self.oldData[" + str(i) + "]) != round(newData[" + str(i) + "])) or self.firstRun:", file = f)
+        print("        if (round(self.oldData[" + str(i) + "]) != round(newData[" + str(i) + "])) or self.firstRun or (self.i % 20 == 0):", file = f)
         print("            dict ={", file = f)
         # print("            \'timestamp\' : newData[" + str(i) + "],", file=f)
         i = i + 1
@@ -59,4 +61,5 @@ with open(file_path) as file:
         print("            }", file=f)
         print("            datJson = json.dumps(dict)", file=f)
         print("            self.client.publish(\"RX1/"+message_list[-1]+"\", datJson)", file=f)
+    print("        self.i = self.i + 1", file=f)
                     

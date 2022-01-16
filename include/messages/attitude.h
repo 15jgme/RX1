@@ -10,9 +10,6 @@ class attitude
 	float w1 = 0.0f;
 	float w2 = 0.0f;
 	float w3 = 0.0f;
-	float alph1 = 0.0f;
-	float alph2 = 0.0f;
-	float alph3 = 0.0f;
 public:
 	uint32_t timestamp = 0;
 	void setq1(float newVal);
@@ -29,12 +26,6 @@ public:
 	float getw2();
 	void setw3(float newVal);
 	float getw3();
-	void setalph1(float newVal);
-	float getalph1();
-	void setalph2(float newVal);
-	float getalph2();
-	void setalph3(float newVal);
-	float getalph3();
 	attitude();
 	String getData(); // Returns all data in topic
 	String getNames(); // Returns a string csv of the names of variables ouput by getData in same order
